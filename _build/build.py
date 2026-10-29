@@ -113,7 +113,7 @@ for si, (sec, items) in enumerate(HOME):
     ncol = 3 if sec in ("Tech Art", "Materials") else 2
     divider = '' if si == len(HOME) - 1 else '<div class="wrap"><hr class="divider"></div>'
     sections.append(f'<section class="home-section"><div class="wrap"><h2 class="section-title">{html.escape(sec)}</h2></div><div class="grid cols-{ncol}">{"".join(cards)}</div>{divider}</section>')
-intro = f'<div class="wrap"><p class="intro">{html.escape(INTRO)}</p></div>'
+intro = ''  # intro line removed; set to INTRO markup to bring it back
 open('index.html', 'w').write(page('Christine Jung — Technical Artist & Environment Artist', intro + '\n'.join(sections), 'home'))
 
 # ---------- project pages ----------

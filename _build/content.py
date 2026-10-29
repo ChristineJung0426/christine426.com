@@ -104,7 +104,7 @@ MATERIALS = {"cobblestone-floor":("Cobblestone Floor","3D-Art_view_5732740.html"
  "wood":("Wood","3D-Art_view_5739227.html"),"versailles-floor":("Versailles Floor","3D-Art_view_5739228.html")}
 
 INTRO = "Technical Artist & Environment Artist — real-time environments, procedural tools, and PBR materials in Unreal Engine 5."
-THUMBS = {"Brick Arch Generator": "images/web/brick-arch-thumb.jpg", "Ice Shader - Problem Solving": "images/web/ice-shader-thumb.mp4", "Water Shader": "images/web/water-shader-thumb.mp4", "Stylized Water Shader": "images/web/stylized-water-thumb.mp4"}
+THUMBS = {"Brick Arch Generator": "images/web/brick-arch-hover.mp4", "Ice Shader - Problem Solving": "images/web/ice-shader-thumb.mp4", "Water Shader": "images/web/water-shader-thumb.mp4", "Stylized Water Shader": "images/web/stylized-water-thumb.mp4"}
 # Info row on each project page. Only facts stated on christinejung426.com or the current site.
 META = {
  "grannys-baking-kitchen": [("Role","Solo · All assets"),("Tools","Unreal Engine 5, Maya, Substance Painter, Substance Designer, Marvelous Designer, Houdini"),("Mentor","Sarah Swenson, Naughty Dog"),("Recognition","1st Place, 80LV Showcase Competition 2026")],

@@ -1,0 +1,5 @@
+images/src/
+_source/
+_trash/
+_build/__pycache__/
+.DS_Store
