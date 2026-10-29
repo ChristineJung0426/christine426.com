@@ -1,0 +1,1542 @@
+{
+  "order": [
+    "grannys-baking-kitchen",
+    "european-alleyway",
+    "enchanted-forest",
+    "kettles",
+    "legos",
+    "brick-arch-generator",
+    "arctic-epoch",
+    "ivy-generator",
+    "daisy-generator",
+    "stylized-water-shader",
+    "cobblestone-floor",
+    "kitchen-tile",
+    "terracotta",
+    "stone-brick-wall",
+    "wood",
+    "versailles-floor"
+  ],
+  "pages": {
+    "arctic-epoch": {
+      "title": "The Arctic Epoch — Singapore",
+      "meta": [
+        [
+          "Role",
+          "Shader Technical Artist"
+        ],
+        [
+          "Team",
+          "Group project, 5 people"
+        ],
+        [
+          "Duration",
+          "14 weeks"
+        ],
+        [
+          "Tools",
+          "Unreal Engine 5, Houdini"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Building procedural winter systems for a frozen Singapore"
+        },
+        {
+          "type": "text",
+          "text": "The Arctic Epoch is a 14-week group project set in a post-apocalyptic Singapore after a global snowstorm. This case study focuses on my snow and icicle generators, ice shader troubleshooting, and snowflake research."
+        },
+        {
+          "type": "text",
+          "text": "I developed the piled snow system in Unreal Engine 5 Blueprint and the ice and icicle generator in Houdini. I also resolved rendering issues in a teammate's ice shader. The environment shown here is a collaborative team result."
+        },
+        {
+          "type": "anchor",
+          "id": "snow"
+        },
+        {
+          "type": "heading",
+          "text": "Piled Snow Generator"
+        },
+        {
+          "type": "text",
+          "text": "Create snow with visible thickness that conforms to different objects, with controls for coverage and a windswept appearance."
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/rGE1g-rqoIk",
+          "title": "Snow thickness and texture blend demonstration"
+        },
+        {
+          "type": "heading",
+          "text": "Controlling the snow"
+        },
+        {
+          "type": "text",
+          "text": "The Blueprint tool exposes snow coverage, sparse rate, sphere size, texture, displacement scale and strength, and mesh caching. These controls let me adapt the generated snow to different assets."
+        },
+        {
+          "type": "heading",
+          "text": "Problem — generating snow on large assets"
+        },
+        {
+          "type": "text",
+          "text": "Large or high-poly models made generation too heavy. Changes to an object's transform or scale also required caching the mesh and generating the snow again."
+        },
+        {
+          "type": "heading",
+          "text": "Solution — generate small, then bake"
+        },
+        {
+          "type": "text",
+          "text": "I generated snow on objects scaled down to 0.02 to reduce the generation burden, then baked the output as a static mesh for use in the environment."
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-d09f8776e1ea8f09.png",
+          "alt": "Generated snow meshes applied across environment assets"
+        },
+        {
+          "type": "caption",
+          "text": "Baked snow output across the environment asset set"
+        },
+        {
+          "type": "heading",
+          "text": "Blending snow into the surface"
+        },
+        {
+          "type": "text",
+          "text": "Alongside the piled geometry, I created a snow texture blend material that could be incorporated into an object's parent material. Blend bias controls the snow amount, while blend sharpness controls the transition."
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/3mMGChkBRZ4",
+          "title": "Snow texture blend controls"
+        },
+        {
+          "type": "anchor",
+          "id": "icicle"
+        },
+        {
+          "type": "heading",
+          "text": "Ice & Icicle Generator"
+        },
+        {
+          "type": "text",
+          "text": "I built a generator that grows ice and icicles in response to an input mesh. Controls include seed birth rate, growth speed and length, thickness, shape, and ice coverage."
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-c8ae8a0d4d6010ab.gif",
+          "alt": "Ice and icicles growing along a Merlion mesh"
+        },
+        {
+          "type": "caption",
+          "text": "Simulated growth conforms to the input mesh"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-716fdf9f4eff47d1.png",
+          "alt": "Houdini icicle generator output and controls"
+        },
+        {
+          "type": "caption",
+          "text": "Ice and icicle generation in Houdini"
+        },
+        {
+          "type": "heading",
+          "text": "From simulation to environment asset"
+        },
+        {
+          "type": "text",
+          "text": "The tool supports animated growth, but the project used the final simulation frame as its output. The Merlion combines this icicle output with accumulated snow."
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-b8969f1b0393b5a4.png",
+          "alt": "Merlion in the team environment with snow and icicles applied"
+        },
+        {
+          "type": "caption",
+          "text": "Combined snow and icicle application in the team's environment"
+        },
+        {
+          "type": "anchor",
+          "id": "ice-shader"
+        },
+        {
+          "type": "heading",
+          "text": "Ice Shader — Rendering & Flickering"
+        },
+        {
+          "type": "text",
+          "text": "A teammate created the original ice shader. My contribution was to investigate and resolve the transparency and flickering issues that appeared when it was used in the snowstorm environment."
+        },
+        {
+          "type": "heading",
+          "text": "Problem — transparency during the snowstorm"
+        },
+        {
+          "type": "text",
+          "text": "The shader used the scene behind the ice to create a translucent appearance. With the snowstorm's 2D sprites behind it, the ice appeared fully transparent instead of retaining its volume."
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-fb5a138a23d807b8.gif",
+          "alt": "Before: ice becomes overly transparent against the snowstorm"
+        },
+        {
+          "type": "caption",
+          "text": "Before — transparency breaks down against the snowstorm"
+        },
+        {
+          "type": "heading",
+          "text": "Problem — distant objects flickering"
+        },
+        {
+          "type": "text",
+          "text": "The ice also showed flickering on distant objects, including the Merlion."
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-59115db637a6c66a.gif",
+          "alt": "Before: flickering visible on distant ice-covered objects"
+        },
+        {
+          "type": "caption",
+          "text": "Before — unstable appearance on distant ice"
+        },
+        {
+          "type": "heading",
+          "text": "Solution — opaque material with apparent depth"
+        },
+        {
+          "type": "text",
+          "text": "I switched the shader to opaque and offset its UV coordinates using the camera vector to preserve a volumetric ice appearance. This avoided relying on the scene behind the ice for its translucent look."
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-05d26a67734c2bed.gif",
+          "alt": "After: opaque ice shader with camera-vector UV offsets"
+        },
+        {
+          "type": "caption",
+          "text": "After — opaque ice with a volumetric appearance"
+        },
+        {
+          "type": "anchor",
+          "id": "snowflake"
+        },
+        {
+          "type": "heading",
+          "text": "Snowflake Generator"
+        },
+        {
+          "type": "text",
+          "text": "Exploratory work — not used in the final playable demo."
+        },
+        {
+          "type": "text",
+          "text": "I developed a parametric snowflake generator for a planned cinematic introduction, referencing Clifford A. Reiter's A local cellular model for snow crystal growth. Alpha, Beta, and Gamma controls let me explore different growth patterns."
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-b27120171dbd41e9.gif",
+          "alt": "Cellular snowflake growth simulation in Houdini"
+        },
+        {
+          "type": "caption",
+          "text": "Procedural snowflake growth study"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-299e6f9b0d763c48.png",
+          "alt": "Snowflake variations produced by Alpha, Beta, and Gamma parameters"
+        },
+        {
+          "type": "caption",
+          "text": "Exploring parameter-driven snowflake variations"
+        },
+        {
+          "type": "text",
+          "text": "When the team changed the deliverable from a cinematic to a playable demo, the snowflake introduction was no longer needed. It remains part of the project's research and development."
+        },
+        {
+          "type": "heading",
+          "text": "Team & Contributions"
+        },
+        {
+          "type": "text",
+          "text": "Christine Jung — Shader Technical Artist · Robin Zheng — Technical Artist, Look-Dev Artist · Caiyu Zhang — Environment Artist · Yuxuan Wu — Environment Artist · Laura Yang — Technical Artist, Look-Dev Artist"
+        },
+        {
+          "type": "text",
+          "text": "This case study focuses on my technical art contributions. Environment imagery shows the collaborative project."
+        },
+        {
+          "type": "text",
+          "text": "Back to the technical breakdown ↑ ↓"
+        }
+      ],
+      "source": "https://christinejung426.com/projects/arctic-epoch/index.html"
+    },
+    "brick-arch-generator": {
+      "title": "Brick Arch Generator",
+      "meta": [
+        [
+          "Role",
+          "Solo — tool design and Python scripting"
+        ],
+        [
+          "Tools",
+          "Maya, Python, LLM-assisted development"
+        ],
+        [
+          "Used in",
+          "European Alleyway"
+        ],
+        [
+          "Year",
+          "2026"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "image",
+          "src": "images/web/latest-c67a0a31c6a540ad.jpg",
+          "alt": "Five brick arch variations generated with the Maya tool"
+        },
+        {
+          "type": "heading",
+          "text": "The Problem"
+        },
+        {
+          "type": "text",
+          "text": "Placing bricks one by one along an arch was slow and repetitive, and hand-placed arches all looked the same. I needed many arch shapes with natural silhouette variation for the alleyway's doorways and bridge."
+        },
+        {
+          "type": "heading",
+          "text": "The Tool"
+        },
+        {
+          "type": "image",
+          "src": "images/web/arch-tool-ui.jpg",
+          "alt": "Brick Arch Generator control panel in Maya"
+        },
+        {
+          "type": "text",
+          "text": "The artist-facing panel in Maya: pick an arch curve and a block, set layout and randomness, then rebuild."
+        },
+        {
+          "type": "video",
+          "src": "images/web/latest-53d1673886bd5dae.mp4",
+          "title": "Project demonstration"
+        },
+        {
+          "type": "text",
+          "text": "2x speed"
+        },
+        {
+          "type": "caption",
+          "text": "Adjusting block count, scale, taper, and seed rebuilds the arch live in Maya."
+        },
+        {
+          "type": "heading",
+          "text": "Source"
+        },
+        {
+          "type": "text",
+          "text": "Draw any curve as the arch shape; pick the block mesh to place"
+        },
+        {
+          "type": "heading",
+          "text": "Layout"
+        },
+        {
+          "type": "text",
+          "text": "Block count, auto-fit block size, mortar gap, wedge taper"
+        },
+        {
+          "type": "heading",
+          "text": "Randomness"
+        },
+        {
+          "type": "text",
+          "text": "Seed, position and rotation jitter, scale and depth variation, face flips"
+        },
+        {
+          "type": "heading",
+          "text": "Workflow"
+        },
+        {
+          "type": "text",
+          "text": "Auto rebuild on change, one-click Build / Rebuild, Reset to Defaults"
+        },
+        {
+          "type": "heading",
+          "text": "Works on Existing Geometry"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-876fca2040cd6ef2.gif",
+          "alt": "Bricks generated around an arch opening in a wall in Maya"
+        },
+        {
+          "type": "caption",
+          "text": "Running the tool along the edge of an arch opening cut into a wall."
+        },
+        {
+          "type": "text",
+          "text": "The tool is not limited to free-standing arches. Selecting the edge of an existing arch and converting it to a curve gives the tool a path to build along, so the same controls work on openings already modelled into walls."
+        },
+        {
+          "type": "heading",
+          "text": "Applied in Scene"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-fb93d353d75ea38a.jpg",
+          "alt": "Generated brick arches applied to the bridge and doorway in European Alleyway"
+        },
+        {
+          "type": "heading",
+          "text": "How I Built It"
+        },
+        {
+          "type": "text",
+          "text": "I designed the tool's behavior and controls, and used an LLM to help write the Maya Python. I tested each version in Maya and adjusted it until the output worked in the scene."
+        },
+        {
+          "type": "anchor",
+          "id": "related-project"
+        },
+        {
+          "type": "text",
+          "text": "Related Project"
+        },
+        {
+          "type": "heading",
+          "text": "European Alleyway"
+        },
+        {
+          "type": "link",
+          "text": "View European Alleyway →",
+          "href": "https://christinejung426.com/projects/european-alleyway/index.html"
+        }
+      ],
+      "source": "https://christinejung426.com/projects/Arch_Generator_Tool/index.html"
+    },
+    "cobblestone-floor": {
+      "title": "Cobblestone Floor",
+      "meta": [
+        [
+          "Type",
+          "Procedural PBR material"
+        ],
+        [
+          "Tools",
+          "Substance Designer"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "image",
+          "src": "images/web/latest-6335941117f526e4.png",
+          "alt": "Mossy Stone — Cylinder and sphere render"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-b54c7891b8e201ba.gif",
+          "alt": "Mossy Stone — Animated surface close-up"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-1b3a2914940dbcf8.png",
+          "alt": "Mossy Stone — PBR texture maps"
+        }
+      ],
+      "source": "https://christinejung426.com/projects/materials/StoneFloor/index.html"
+    },
+    "daisy-generator": {
+      "title": "Daisy Generator",
+      "meta": [
+        [
+          "Tools",
+          "Houdini"
+        ],
+        [
+          "Type",
+          "Houdini Digital Asset (HDA) — Procedural Flower Generator"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "An adjustable daisy generator based on Fibonacci numbers."
+        },
+        {
+          "type": "text",
+          "text": "You can control the number of petals, petal width and bend intensity to customize the look of the daisy."
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/awv_56pOzuY",
+          "title": "Daisy Generator"
+        },
+        {
+          "type": "text",
+          "text": "Demo"
+        }
+      ],
+      "source": "https://christinejung426.com/projects/daisy/index.html"
+    },
+    "enchanted-forest": {
+      "title": "Enchanted Forest",
+      "meta": [
+        [
+          "Role",
+          "Personal project · Set-dressing, lighting, water shader"
+        ],
+        [
+          "Tools",
+          "Unreal Engine 5"
+        ],
+        [
+          "Assets",
+          "Natural assets from Quixel"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "A moody atmospheric forest with custom water decal shaders"
+        },
+        {
+          "type": "text",
+          "text": "A cinematic forest environment focused on atmospheric lighting, volumetric fog, and natural asset composition — built in both day and night variations. The project also features custom water decal shaders for caustic light patterns and surface wetness, bringing technical depth to the environmental storytelling."
+        },
+        {
+          "type": "text",
+          "text": "* Received professional feedback from Gerardo Contreras (Surface and LRC Artist)"
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/bHA8WobmH0A",
+          "title": "Enchanted Forest - Unreal Engine 5"
+        },
+        {
+          "type": "caption",
+          "text": "Full Experience"
+        },
+        {
+          "type": "heading",
+          "text": "Night Environment"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-86309c6c917b6310.jpg",
+          "alt": "Enchanted Forest — night scene hero"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-51fe1443bf0284f1.jpg",
+          "alt": "Enchanted Forest — night scene angle 2"
+        },
+        {
+          "type": "caption",
+          "text": "Volumetric fog and atmospheric lighting"
+        },
+        {
+          "type": "heading",
+          "text": "Day Environment"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-404684a6dd0aac98.png",
+          "alt": "Enchanted Forest — daytime scene"
+        },
+        {
+          "type": "caption",
+          "text": "Day lighting — natural sunlight through canopy"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-c814cd37ab178c8b.jpg",
+          "alt": "Enchanted Forest — daytime alternate angle"
+        },
+        {
+          "type": "caption",
+          "text": "Day — alternate angle"
+        },
+        {
+          "type": "anchor",
+          "id": "water"
+        },
+        {
+          "type": "heading",
+          "text": "Custom Water Decal Shaders"
+        },
+        {
+          "type": "text",
+          "text": "Developed custom water decal shaders to add realism and technical depth to the scene: a water shader for realistic surface rendering, a caustic light pattern simulating light refraction through water, and a surface wetness decal for organic wet-surface variation on rocks and ground."
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/AqXUOm70n0M",
+          "title": "Water Shader Demo"
+        },
+        {
+          "type": "caption",
+          "text": "Water shader demo"
+        },
+        {
+          "type": "heading",
+          "text": "Water"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-490add377df57d43.gif",
+          "alt": "Water shader in scene"
+        },
+        {
+          "type": "caption",
+          "text": "Water shader"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-fd34cf5b3a95d92b.png",
+          "alt": "Water shader node graph"
+        },
+        {
+          "type": "caption",
+          "text": "Water — node graph"
+        },
+        {
+          "type": "heading",
+          "text": "Caustic"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-a9948308e2674eae.gif",
+          "alt": "Water caustic decal shader — animated"
+        },
+        {
+          "type": "caption",
+          "text": "Water caustic decal"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-96de6497e9475452.png",
+          "alt": "Water caustic shader node graph"
+        },
+        {
+          "type": "caption",
+          "text": "Water caustic — node graph"
+        },
+        {
+          "type": "heading",
+          "text": "Wetness"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-fd3d11b17e5407bf.gif",
+          "alt": "Wetness decal — animated"
+        },
+        {
+          "type": "caption",
+          "text": "Wetness decal"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-33e8f52a0180039d.jpg",
+          "alt": "Wetness shader node graph"
+        },
+        {
+          "type": "caption",
+          "text": "Wetness — node graph"
+        }
+      ],
+      "source": "https://christinejung426.com/projects/enchanted-forest/index.html"
+    },
+    "european-alleyway": {
+      "title": "European Alleyway (WIP)",
+      "meta": [
+        [
+          "Role",
+          "Solo · All assets & materials"
+        ],
+        [
+          "Mentor",
+          "Sarah Swenson, Naughty Dog"
+        ],
+        [
+          "Tools",
+          "Unreal Engine 5, Maya, ZBrush, Substance Designer, Substance Painter"
+        ],
+        [
+          "Status",
+          "Work in Progress"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "A technical case study in procedural PBR materials and lifelike environments"
+        },
+        {
+          "type": "text",
+          "text": "A technical case study focused on authoring a procedural PBR material library and building a \"lifelike environment\" using modern AAA workflows."
+        },
+        {
+          "type": "text",
+          "text": "All assets and materials in this study were created entirely from scratch by me. This project demonstrates the complete environment art pipeline, from procedural texturing to modular asset creation."
+        },
+        {
+          "type": "text",
+          "text": "– Materials: Authored a 100% procedural PBR material library (plaster, cobblestone, brick) in Substance Designer."
+        },
+        {
+          "type": "text",
+          "text": "– Assets: Responsible for the entire asset pipeline: high-poly sculpting (ZBrush), modeling (Maya), baking, and texturing."
+        },
+        {
+          "type": "text",
+          "text": "* Developed with professional feedback and guidance from Sarah Swenson (Senior Environment Artist, Naughty Dog)."
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-55b20736740ddcfe.jpg",
+          "alt": "European Alleyway — full render"
+        },
+        {
+          "type": "heading",
+          "text": "Block Out & Concept Art"
+        },
+        {
+          "type": "text",
+          "text": "Concept art generated by Midjourney"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-d5244e028bba0af4.png",
+          "alt": "Scene blockout stage"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-1aa7362f755fa2ab.png",
+          "alt": "Concept art reference"
+        },
+        {
+          "type": "heading",
+          "text": "Material Layering"
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/78A02vnci40",
+          "title": "Material Layering — Stone Floor"
+        },
+        {
+          "type": "text",
+          "text": "Material Layering — Stone Floor"
+        },
+        {
+          "type": "heading",
+          "text": "Brick Wall"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-5816bbcd6b5659bc.png",
+          "alt": "Brick wall material sheet"
+        },
+        {
+          "type": "caption",
+          "text": "Brick wall — material sheet"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-1d176685deb46b08.gif",
+          "alt": "Brick wall material animated turntable"
+        },
+        {
+          "type": "caption",
+          "text": "Brick wall — Different dirt level applied"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-eaaa19b5579084f3.png",
+          "alt": "Brick wall detail render"
+        },
+        {
+          "type": "caption",
+          "text": "Brick wall — detail render"
+        },
+        {
+          "type": "heading",
+          "text": "Stone Floor"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-ce26b629149c2822.png",
+          "alt": "Stone floor material set"
+        },
+        {
+          "type": "caption",
+          "text": "Stone floor — material set"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-ede189ff1a5d65b9.gif",
+          "alt": "Stone floor material animated turntable"
+        },
+        {
+          "type": "caption",
+          "text": "Stone floor — Moss, Dirt, Clean"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-d4f1e92752d5319d.png",
+          "alt": "Stone floor material pack"
+        },
+        {
+          "type": "caption",
+          "text": "Stone floor — full material pack"
+        },
+        {
+          "type": "heading",
+          "text": "Wood"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-c10fd43fe59ed3a1.png",
+          "alt": "Wood material"
+        },
+        {
+          "type": "caption",
+          "text": "Wood"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-425225a0776c5f9a.png",
+          "alt": "Wood material pack"
+        },
+        {
+          "type": "caption",
+          "text": "Wood — material pack"
+        },
+        {
+          "type": "heading",
+          "text": "Terracotta"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-976eec4bc98820bc.png",
+          "alt": "Terracotta close-up"
+        },
+        {
+          "type": "caption",
+          "text": "Terracotta"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-25a2b9f193390c52.png",
+          "alt": "Terracotta material pack"
+        },
+        {
+          "type": "caption",
+          "text": "Terracotta — material pack"
+        },
+        {
+          "type": "heading",
+          "text": "Asset Breakdown"
+        },
+        {
+          "type": "text",
+          "text": "Maya, ZBrush, Substance Designer, Substance Painter"
+        },
+        {
+          "type": "heading",
+          "text": "Plant Assets"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-42a21162e509d37d.png",
+          "alt": "Plant asset pack"
+        },
+        {
+          "type": "caption",
+          "text": "Plant asset pack"
+        },
+        {
+          "type": "anchor",
+          "id": "brick-arch-generator"
+        },
+        {
+          "type": "heading",
+          "text": "Brick Arch Generator"
+        },
+        {
+          "type": "text",
+          "text": "Designed an artist-facing Maya tool to procedurally place bricks along different arch profiles, reducing repetitive manual placement and adding silhouette variation to modular architecture. Developed through an LLM-assisted Python workflow and used in the final European Alleyway environment."
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-c67a0a31c6a540ad.jpg",
+          "alt": "Five brick arch variations generated with the Maya tool"
+        },
+        {
+          "type": "caption",
+          "text": "Arch variations generated with the tool"
+        },
+        {
+          "type": "link",
+          "text": "View the Brick Arch Generator case study →",
+          "href": "https://christinejung426.com/projects/Arch_Generator_Tool/index.html"
+        },
+        {
+          "type": "heading",
+          "text": "High Poly Sculpts"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-76799c976c83c3be.png",
+          "alt": "Brick high poly sculpt 1"
+        },
+        {
+          "type": "caption",
+          "text": "High poly — brick 1"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-517dc0bf956ede9e.png",
+          "alt": "Brick high poly sculpt 2"
+        },
+        {
+          "type": "caption",
+          "text": "High poly — brick 2"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-6014d9e0568dd329.png",
+          "alt": "Brick high poly sculpt 3"
+        },
+        {
+          "type": "caption",
+          "text": "High poly — brick 3"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-f31792b2777e6d49.png",
+          "alt": "Brick high poly sculpt 4"
+        },
+        {
+          "type": "caption",
+          "text": "High poly — brick 4"
+        },
+        {
+          "type": "heading",
+          "text": "Textured Results"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-5a4456979be1ef7f.png",
+          "alt": "Brick textured result 1"
+        },
+        {
+          "type": "caption",
+          "text": "Textured — brick 1"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-07dd34846563b0f7.png",
+          "alt": "Brick textured result 2"
+        },
+        {
+          "type": "caption",
+          "text": "Textured — brick 2"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-53efc614e591387e.png",
+          "alt": "Brick textured result 3"
+        },
+        {
+          "type": "caption",
+          "text": "Textured — brick 3"
+        }
+      ],
+      "source": "https://christinejung426.com/projects/european-alleyway/index.html"
+    },
+    "grannys-baking-kitchen": {
+      "title": "Granny's Baking Kitchen",
+      "meta": [
+        [
+          "Role",
+          "Environment, props & materials; plants from Quixel"
+        ],
+        [
+          "Mentor",
+          "Sarah Swenson, Naughty Dog"
+        ],
+        [
+          "Recognition",
+          "1st Place, 80LV Showcase Competition 2026"
+        ],
+        [
+          "Tools",
+          "Unreal Engine 5, Maya, Substance Designer, Marvelous Designer, Houdini"
+        ],
+        [
+          "Mentorship",
+          "Sarah Swenson — Senior Environment Artist, Naughty Dog"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "A warm, lived-in kitchen built to feel nostalgic and real"
+        },
+        {
+          "type": "text",
+          "text": "Granny's Baking Kitchen is inspired by a grandmother who loves baking. The space is designed to feel cozy and nostalgic, with props and details that capture the charm of everyday baking. Every asset — from the hand-painted ceramic tiles to the worn wooden table — was crafted to tell a story."
+        },
+        {
+          "type": "text",
+          "text": "Developed with professional feedback and guidance from Sarah Swenson, Senior Environment Artist at Naughty Dog. Plants from Quixel."
+        },
+        {
+          "type": "heading",
+          "text": "Environment Walkthrough"
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/8ELBvSncMdk",
+          "title": "Granny's Baking Kitchen — Environment Art"
+        },
+        {
+          "type": "text",
+          "text": "Granny's Baking Kitchen — Full Environment Walkthrough"
+        },
+        {
+          "type": "heading",
+          "text": "Final Renders"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-936408b31f7e7a2f.jpg",
+          "alt": "Kitchen hero render — full scene"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-529eb6253daccd60.png",
+          "alt": "Kitchen render — angle 2"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-eaa8d151c237432f.png",
+          "alt": "Kitchen render — angle 3"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-0478f218fe20d150.png",
+          "alt": "Kitchen render — wide view"
+        },
+        {
+          "type": "heading",
+          "text": "Props & Asset Exploded View"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-412a27bad208c84b.png",
+          "alt": "All kitchen props laid out — asset pack"
+        },
+        {
+          "type": "caption",
+          "text": "All kitchen props laid out"
+        },
+        {
+          "type": "heading",
+          "text": "Asset Turntable"
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/d1thsSXjYps",
+          "title": "Kitchen Asset Turntable"
+        },
+        {
+          "type": "text",
+          "text": "Kitchen Asset Turntable"
+        },
+        {
+          "type": "heading",
+          "text": "Surface Materials"
+        },
+        {
+          "type": "text",
+          "text": "Custom-crafted materials developed in Substance Designer."
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-8169bdf081ab6c58.png",
+          "alt": "Hand-painted kitchen tile material"
+        },
+        {
+          "type": "caption",
+          "text": "Kitchen Tile"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-defdf90fe12e47b8.png",
+          "alt": "Versailles pattern floor material"
+        },
+        {
+          "type": "caption",
+          "text": "Versailles Floor"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-a0f9d0942a4cb497.png",
+          "alt": "Worn wood material"
+        },
+        {
+          "type": "caption",
+          "text": "Wood"
+        },
+        {
+          "type": "heading",
+          "text": "Progress"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-70aad45b7b8870d0.gif",
+          "alt": "Kitchen scene progress over time"
+        },
+        {
+          "type": "caption",
+          "text": "Scene build-up progress"
+        },
+        {
+          "type": "heading",
+          "text": "Recognition & Press"
+        },
+        {
+          "type": "link",
+          "text": "1st Place — 80LV Showcase Competition 2026",
+          "href": "https://80.lv/articles/showcase-competition-winners-announced-2026"
+        },
+        {
+          "type": "link",
+          "text": "Featured on 80 Level — Granny’s Baking Kitchen",
+          "href": "https://80.lv/articles/check-out-this-cozy-grandma-s-kitchen-3d-scene-created-with-unreal-engine"
+        }
+      ],
+      "source": "https://christinejung426.com/projects/grannys-kitchen/index.html"
+    },
+    "ivy-generator": {
+      "title": "Ivy Generator",
+      "meta": [
+        [
+          "Tools",
+          "Houdini"
+        ],
+        [
+          "Type",
+          "Houdini Digital Asset (HDA) — Procedural Foliage Generator"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "An adjustable ivy generator that can be applied to any mesh."
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/83Zrwic3-p8",
+          "title": "Houdini Ivy Generator"
+        },
+        {
+          "type": "text",
+          "text": "Demo"
+        }
+      ],
+      "source": "https://christinejung426.com/projects/ivy/index.html"
+    },
+    "kettles": {
+      "title": "Kettles",
+      "meta": [
+        [
+          "Role",
+          "Solo · All assets"
+        ],
+        [
+          "Year",
+          "2021"
+        ],
+        [
+          "Tools",
+          "Maya, Substance Painter, VRay"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Full 3D artwork to illustrate modeling, texturing, and lighting abilities."
+        },
+        {
+          "type": "text",
+          "text": "Objects such as the teapots, crate, pillar, and wall were created from scratch."
+        },
+        {
+          "type": "image",
+          "src": "images/web/Kettles_07259750.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_ca96f534.jpg",
+          "alt": ""
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/MtxLPr0N5ak",
+          "title": "Video"
+        },
+        {
+          "type": "heading",
+          "text": "Substance Painter"
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_472ae9c1.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_a843866f.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_b13e0034.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_22f524ec.jpg",
+          "alt": ""
+        },
+        {
+          "type": "heading",
+          "text": "Image Reference"
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_4cc0894f.jpg",
+          "alt": ""
+        }
+      ],
+      "source": "https://christinejung426.com/projects/Kettle/index.html"
+    },
+    "kitchen-tile": {
+      "title": "Kitchen Tile",
+      "meta": [
+        [
+          "Type",
+          "Procedural PBR material"
+        ],
+        [
+          "Tools",
+          "Substance Designer"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "image",
+          "src": "images/web/latest-ca82d4f47828fa9b.png",
+          "alt": "Blue Ceramic Tile — Cylinder and sphere render"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-8d8a5dda9027c7ec.png",
+          "alt": "Blue Ceramic Tile — Surface close-up"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-5118b39033ea5306.png",
+          "alt": "Blue Ceramic Tile — PBR texture maps"
+        }
+      ],
+      "source": "https://christinejung426.com/projects/materials/KitchenTile/index.html"
+    },
+    "legos": {
+      "title": "Legos",
+      "meta": [
+        [
+          "Role",
+          "Solo · All assets"
+        ],
+        [
+          "Year",
+          "2021"
+        ],
+        [
+          "Tools",
+          "Maya, ZBrush, Substance Painter, VRay"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "A realistic translucent 3D scene of piled Legos."
+        },
+        {
+          "type": "text",
+          "text": "The legos are made based on their actual size and are real products, rendered to showcase iridescent translucent material properties."
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_cb33b92b.jpg",
+          "alt": ""
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/cbV0MJhZILw",
+          "title": "Video"
+        },
+        {
+          "type": "heading",
+          "text": "ZBrush scratch sculpting"
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_5eb87e6f.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_d41d41e2.jpg",
+          "alt": ""
+        },
+        {
+          "type": "heading",
+          "text": "Test Render"
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_c8bf5edd.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_806f4665.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_3612b7a3.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_53c4c0cd.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_521c08d8.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_52024ff9.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_3dea8060.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_31251478.jpg",
+          "alt": ""
+        },
+        {
+          "type": "heading",
+          "text": "Image Reference"
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_a7b64d0c.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_019aeb67.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_c5d9794d.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_df9f2099.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/img_cca94993.jpg",
+          "alt": ""
+        }
+      ],
+      "source": "https://christinejung426.com/projects/Lego/index.html"
+    },
+    "stone-brick-wall": {
+      "title": "Stone Brick Wall",
+      "meta": [
+        [
+          "Type",
+          "Procedural PBR material"
+        ],
+        [
+          "Tools",
+          "Substance Designer"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "image",
+          "src": "images/web/latest-d24600a936e8cc44.png",
+          "alt": "Brick — Cylinder and sphere render"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-8ad80878a9587d29.gif",
+          "alt": "Brick — Animated surface close-up"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-9e127ec6b9088772.png",
+          "alt": "Brick — PBR texture maps"
+        }
+      ],
+      "source": "https://christinejung426.com/projects/materials/BrickWall/index.html"
+    },
+    "stylized-water-shader": {
+      "title": "Stylized Water Shader",
+      "meta": [
+        [
+          "Type",
+          "Water shader and day / sunset / night skybox"
+        ],
+        [
+          "Tools",
+          "Unity, Shader Graph"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Stylized water and an interactive skybox built in Unity Shader Graph. The demonstrations show the water surface and transitions between day, sunset, and night."
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/SwYkpIflJKI",
+          "title": "Video"
+        },
+        {
+          "type": "heading",
+          "text": "Interactive Skybox"
+        },
+        {
+          "type": "embed",
+          "src": "https://www.youtube-nocookie.com/embed/7PWA0fHBX4o",
+          "title": "Video"
+        }
+      ],
+      "source": "https://christine426.com/"
+    },
+    "terracotta": {
+      "title": "Terracotta",
+      "meta": [
+        [
+          "Type",
+          "Procedural PBR material"
+        ],
+        [
+          "Tools",
+          "Substance Designer"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Procedural terracotta material authored in Substance Designer for European Alleyway."
+        },
+        {
+          "type": "image",
+          "src": "images/web/Terracotta_d9d90604.jpg",
+          "alt": ""
+        },
+        {
+          "type": "image",
+          "src": "images/web/Terracotta_pack_4d44ec84.jpg",
+          "alt": ""
+        }
+      ],
+      "source": "https://christine426.com/"
+    },
+    "versailles-floor": {
+      "title": "Versailles Floor",
+      "meta": [
+        [
+          "Type",
+          "Procedural PBR material"
+        ],
+        [
+          "Tools",
+          "Substance Designer"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Versailles Parquet"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-8e49e42caf5d4594.webp",
+          "alt": "Versailles Parquet — Material renders and surface close-up"
+        }
+      ],
+      "source": "https://christinejung426.com/projects/materials/WoodenFloor/index.html"
+    },
+    "wood": {
+      "title": "Wood",
+      "meta": [
+        [
+          "Type",
+          "Procedural PBR material"
+        ],
+        [
+          "Tools",
+          "Substance Designer"
+        ]
+      ],
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Dark Wood"
+        },
+        {
+          "type": "image",
+          "src": "images/web/latest-64b470559920fa30.png",
+          "alt": "Dark Wood — Material renders and surface close-up"
+        }
+      ],
+      "source": "https://christinejung426.com/projects/materials/WoodenFloor/index.html"
+    }
+  }
+}

@@ -1,41 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, noimageindex">
-<title>Brick Arch Generator — Christine Jung</title>
-<meta name="description" content="Portfolio of Christine Jung. Specializing in immersive 3D environments, procedural generation, and PBR material authoring in Unreal Engine and Unity.">
-<meta property="og:title" content="Brick Arch Generator — Christine Jung">
-<meta property="og:description" content="Christine Jung — Technical Artist &amp; Environment Artist. Real-time environments, procedural tools, and PBR materials in Unreal Engine 5.">
-<meta property="og:image" content="https://christine426.com/images/web/Granny_s_Baking_Kitchen_d3dcb7e3.jpg">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="../favicon.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Abel&family=Nanum+Gothic:wght@400;700&family=Open+Sans:wght@400;700&family=Roboto:wght@400&display=swap" rel="stylesheet"><link href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css" rel="stylesheet">
-<link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex, noimageindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <title>Brick Arch Generator — Christine Jung</title>
+  <meta name="description" content="An artist-facing Maya tool that procedurally places bricks along an arch curve, with layout and randomness controls for silhouette variation. Used in the European Alleyway environment." />
+  
+  
+<link rel="stylesheet" href="../case-base.css"><link rel="stylesheet" href="../case-layout.css"><link rel="stylesheet" href="../case-dark.css">
 </head>
 <body>
-<header class="site-header">
-  <div class="header-inner">
-    <a class="logo" href="../index.html">CHRISTINEJUNG</a>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')"><span></span><span></span><span></span></button>
-    <nav class="site-nav"><a href="../index.html" class="active">3D Art</a><a href="../demo-reel.html">Demo Reel</a><a href="../photography.html">Photography</a><a href="../ChristineJung_Resume.pdf" target="_blank" rel="noopener">Resume</a></nav>
+  <nav class="project-nav" id="projectNav">
+    <div class="project-nav-left">
+      <a href="../index.html" class="back-link">Tech Art</a>
+      <div class="nav-divider"></div>
+      <a href="../index.html" class="project-nav-logo">Christine Jung</a>
+    </div>
+    <div class="project-nav-right">
+      <a href="../index.html">Portfolio</a>
+      <a href="mailto:christineart426@gmail.com">Contact</a>
+    </div>
+  </nav>
+
+  <header style="padding-top: var(--nav-h);">
+    <div class="project-hero">
+      <p class="project-eyebrow">Tech Art &nbsp;·&nbsp; Artist Tool</p>
+      <h1 class="project-title">Brick Arch Generator</h1>
+      <div class="project-meta-grid">
+        <div class="project-meta-item">
+          <span class="meta-label">Role</span>
+          <span class="meta-value">Solo — tool design and Python scripting</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="meta-label">Tools</span>
+          <span class="meta-value">Maya, Python, LLM-assisted development</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="meta-label">Used in</span>
+          <span class="meta-value">European Alleyway</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="meta-label">Year</span>
+          <span class="meta-value">2026</span>
+        </div>
+      </div>
+      <div class="tag-row">
+        <span class="tag">Maya</span>
+        <span class="tag">Python</span>
+        <span class="tag">Artist Tool</span>
+        <span class="tag">LLM-Assisted Development</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="project-content">
+
+    <!-- ===== Hero ===== -->
+    <section class="case-section" aria-label="Generated arches">
+      <div class="gallery gallery-1">
+        <figure class="gallery-item">
+          <img src="../images/web/latest-c67a0a31c6a540ad.jpg" alt="Five brick arch variations generated with the Maya tool" width="2400" height="1350">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== The Problem ===== -->
+    <section class="case-section">
+      <div class="callout">
+        <div class="callout-label">The Problem</div>
+        <p>Placing bricks one by one along an arch was slow and repetitive, and hand-placed arches all looked the same. I needed many arch shapes with natural silhouette variation for the alleyway's doorways and bridge.</p>
+      </div>
+    </section>
+
+    <!-- ===== The Tool ===== -->
+    <section class="case-section">
+      <h2>The Tool</h2>
+      <p>The artist-facing panel in Maya: pick an arch curve and a block, set layout and randomness, then rebuild.</p>
+
+      <div class="gallery gallery-1">
+        <figure class="gallery-item">
+          <video src="../images/web/latest-53d1673886bd5dae.mp4" muted autoplay loop playsinline controls></video>
+          <p class="media-note">2x speed</p>
+          <figcaption>Adjusting block count, scale, taper, and seed rebuilds the arch live in Maya.</figcaption>
+        </figure>
+      </div>
+
+      <div class="tool-spec-grid">
+        <div class="tool-spec-item">
+          <span class="tool-spec-label">Source</span>
+          <p>Draw any curve as the arch shape; pick the block mesh to place</p>
+        </div>
+        <div class="tool-spec-item">
+          <span class="tool-spec-label">Layout</span>
+          <p>Block count, auto-fit block size, mortar gap, wedge taper</p>
+        </div>
+        <div class="tool-spec-item">
+          <span class="tool-spec-label">Randomness</span>
+          <p>Seed, position and rotation jitter, scale and depth variation, face flips</p>
+        </div>
+        <div class="tool-spec-item">
+          <span class="tool-spec-label">Workflow</span>
+          <p>Auto rebuild on change, one-click Build / Rebuild, Reset to Defaults</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Works on existing geometry ===== -->
+    <section class="case-section">
+      <h3>Works on Existing Geometry</h3>
+      <div class="case-split">
+        <figure class="gallery-item">
+          <img src="../images/web/latest-876fca2040cd6ef2.gif" alt="Bricks generated around an arch opening in a wall in Maya" loading="lazy">
+          <figcaption>Running the tool along the edge of an arch opening cut into a wall.</figcaption>
+        </figure>
+        <div class="case-split-body">
+          <p>The tool is not limited to free-standing arches. Selecting the edge of an existing arch and converting it to a curve gives the tool a path to build along, so the same controls work on openings already modelled into walls.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Applied in Scene ===== -->
+    <section class="case-section">
+      <h3>Applied in Scene</h3>
+      <div class="gallery gallery-1">
+        <figure class="gallery-item">
+          <img src="../images/web/latest-fb93d353d75ea38a.jpg" alt="Generated brick arches applied to the bridge and doorway in European Alleyway" width="2540" height="1423" loading="lazy">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== How I Built It ===== -->
+    <section class="case-section">
+      <h2>How I Built It</h2>
+      <p>I designed the tool's behavior and controls, and used an LLM to help write the Maya Python. I tested each version in Maya and adjusted it until the output worked in the scene.</p>
+    </section>
+
+    <!-- ===== Related Project ===== -->
+    <section class="case-section" aria-labelledby="related-project">
+      <p class="project-eyebrow" id="related-project">Related Project</p>
+      <h3>European Alleyway</h3>
+      <a href="european-alleyway.html" class="card-cta">View European Alleyway →</a>
+    </section>
+
+  </main>
+
+  <div class="project-footer">
+    <div class="project-footer-inner">
+      <a href="../index.html" class="back-to-work">Back to Tech Art</a>
+      <p class="footer-copy-sm">© 2026 Christine Jung</p>
+    </div>
   </div>
-</header>
-<main>
-<article class="project wrap"><div class="project-top"><div><h1 class="project-title">Brick Arch Generator</h1><dl class="meta"><div><dt>Role</dt><dd>Solo · Tool design and Python scripting</dd></div><div><dt>Tools</dt><dd>Maya, Python, LLM-assisted development</dd></div><div><dt>Used in</dt><dd>European Alleyway</dd></div></dl></div><div class="pager"><a class="pn prev" href="daisy-generator.html" aria-label="Previous project">&#8249;</a><a class="pn next" href="stylized-water-shader.html" aria-label="Next project">&#8250;</a></div></div><div class="desc"><p>Automatic brick arch generator in Maya Python, created in an LLM-assisted process, that can be applied to any arch mesh. Used in European Alleyway.</p></div><figure class="media"><img src="../images/web/brick-arch-pack.jpg" width="2400" height="1350" alt="" loading="lazy"></figure><div class="subhead"><h3>The Tool</h3></div><figure class="media"><img src="../images/web/arch-tool-ui.jpg" width="2312" height="1643" alt="" loading="lazy"></figure><div class="subhead"><h3>Tool in Action</h3><p>2x speed</p></div><figure class="media"><video src="../images/web/brick-arch-demo-2x.mp4" autoplay muted loop playsinline controls></video></figure><div class="subhead"><h3>Applied in Scene</h3></div><figure class="media"><img src="../images/web/Screenshot_2026-04-28_at_3.59_.45_PM__3e98b9ce.jpg" width="1128" height="1224" alt="" loading="lazy"></figure></article>
-</main>
-<footer class="site-footer">
-  <div class="wrap footer-inner">
-    <div class="find-me"><span class="dash"></span><span>F I N D &nbsp; M E &nbsp; O N</span></div>
-    <dl class="contact">
-      <dt>Email</dt><dd><a href="mailto:christineart426@gmail.com">christineart426@gmail.com</a></dd>
-      <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/christinejung426/" target="_blank" rel="noopener">linkedin.com/in/christinejung426</a></dd>
-    </dl>
-  </div>
-</footer>
-<a class="goto-top" href="#" aria-label="Back to top"></a>
-<script src="../site.js"></script>
-</body>
+
+  
+  
+<script src="../case-carousel.js"></script><script src="../case-interactions.js"></script></body>
 </html>

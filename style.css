@@ -113,3 +113,26 @@ img { display: block; max-width: 100%; height: auto; }
   .project-top { flex-direction: column; gap: 16px; }
   .card figcaption { padding: 0 5px 5px; }
 }
+
+/* Case study reading and navigation; original homepage styling is unchanged. */
+.subhead h2 { font: 700 17px/1.5 "Nanum Gothic", sans-serif; margin: 0; }
+.project .desc { line-height: 1.8; max-width: 850px; margin-bottom: 24px; }
+.project .media img { object-fit: contain; max-height: 900px; }
+.media-caption { font: 400 12px/1.6 "Open Sans", sans-serif; color: #aaa; margin: -34px 0 40px; }
+.project-link { font: 400 13px/1.8 "Open Sans", sans-serif; margin: 24px 0 40px; }
+.project-link a, .project-sections a { text-decoration: underline; text-underline-offset: 4px; }
+.project-sections { display: flex; flex-wrap: wrap; gap: 12px 24px; margin: 0 0 36px; font: 400 12px/1.8 "Open Sans", sans-serif; }
+.project a:focus-visible { outline: 2px solid #fff; outline-offset: 5px; }
+@media (max-width: 767px) { .project { padding-top: 24px; } .project .media { margin-bottom: 32px; } .media-caption { margin-top: -20px; } }
+.project .media:has(+ .media-caption) { margin-bottom: 12px; }
+.project .media-caption { margin: 0 0 40px; }
+img, video { -webkit-user-drag: none; -webkit-touch-callout: none; user-select: none; }
+
+/* Show the full animated ivy study with black breathing room. */
+.card[href="projects/ivy-generator.html"] figure { background: #000; }
+.card[href="projects/ivy-generator.html"] img {
+  object-fit: contain;
+  object-position: center;
+  padding: 12px 0;
+  background: #000;
+}

@@ -16,3 +16,9 @@ document.querySelectorAll('.media img, a[data-lightbox]').forEach(el => {
   el.style.cursor = 'zoom-in';
   el.addEventListener('click', e => { e.preventDefault(); lb.querySelector('img').src = el.tagName === 'A' ? el.href : el.src; lb.classList.add('on'); });
 });
+// Discourage normal image-saving gestures, including inside the enlarged view.
+for (const event of ['contextmenu', 'dragstart']) document.addEventListener(event, e => {
+  if (e.target.closest('img, video, a[data-lightbox], .lb')) e.preventDefault();
+});
+document.querySelectorAll('img').forEach(img => { img.draggable = false; });
+document.querySelectorAll('video').forEach(video => video.setAttribute('controlsList', 'nodownload'));
